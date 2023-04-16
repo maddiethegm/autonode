@@ -241,7 +241,7 @@ if [[ "$new_swarm" = true ]]; then
 else
   join_swarm
 fi
-read
+read -p "Installation complete. Press any button to close."
 
 
 
