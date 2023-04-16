@@ -16,6 +16,8 @@ To input values manually while Autonode runs, simply make the script executable 
 
 > ./autonode.sh
 
+Project is actively monitored at https://git.cliffhouse.games, mirrored to https://github.com/imthegm/autonode
+
 For support, email kris@cliffhouse.games or join the Cliffhouse Games discord server at https://discord.cliffhouse.games
 
 Enjoy!
