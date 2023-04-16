@@ -28,9 +28,9 @@ nfsclient_installed=false
 ####
 # Detect init file if given, verify that it exists, and set quiet_install to true or false
 ##
-if [ "$1" == "-init" ]; then
+if [[ "$1" == "-init" ]]; then
     INPUT_FILE="$2"
-    if ! [ -f "$INPUT_FILE" ]; then
+    if ! [[ -f "$INPUT_FILE" ]]; then
         echo "Error: File not found: $INPUT_FILE"
         exit 1
     fi
@@ -223,13 +223,12 @@ mount_containdir() {
       systemctl start docker
     fi
 }
-
-
+####
+# Execute functions based on selected parameters.
+##
 if [[ "$docker_installed" = false ]]; then
 install_docker
 fi
-
-
 if [[ "$enable_ssh" = true ]]; then
   allow_ssh
 fi
@@ -242,6 +241,7 @@ if [[ "$new_swarm" = true ]]; then
 else
   join_swarm
 fi
+read
 
 
 
