@@ -216,7 +216,9 @@ mount_containdir() {
     apt-get install nfs-common -y
     fi
     mkdir $local_mount
-    mount $nfs_url:$nfs_mount $local_mount
+    echo "$nfs_url:$nfs_mount /$local_mount nfs default 0 0" | tee -a /etc/fstab
+    systemctl daemon-reload
+    mount -a
     if [[ "$nfs_docker_data" = true ]]; then
       touch /etc/docker/daemon.json
       echo "{ 
