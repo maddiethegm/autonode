@@ -25,6 +25,8 @@ new_swarm=false
 nfs_setup=false
 enable_ssh=false
 nfsclient_installed=false
+remote_subdir=$(hostname)
+quiet_install=""
 ####
 # Detect init file if given, verify that it exists, and set quiet_install to true or false
 ##
@@ -35,7 +37,9 @@ if [[ "$1" == "-init" ]]; then
         exit 1
     fi
     source "$INPUT_FILE"
-    quiet_install=true
+    if [[ -z "$quit_install" ]]; then
+      quiet_install=true
+    fi
     if [[ -z "$log_file" ]]; then
       log_file=install.log
     fi
@@ -143,8 +147,7 @@ if [ "$quiet_install"=false ]; then
     done
   fi
   while true; do
-    echo "! WARNING ! Enabling the following will cause weird errors if you are using "$nfs_url":"$nfs_mount" for multiple docker daemons!!"
-    read -p "Do you want to use this share as the default location for docker containers? (y/n) " nfs_docker_data_opt
+    read -p "Do you want to use a subdirectory of this share as the default location for docker containers? (y/n) " nfs_docker_data_opt
     if ([ "$nfs_docker_data_opt" == "y" ] || [ "$nfs_docker_data_opt" == "Y" ] || [ "$nfs_docker_data_opt" == "n" ] || [ "$nfs_docker_data_opt" == "N" ]); then
       break
     else
@@ -217,7 +220,7 @@ mount_containdir() {
     if [[ "$nfs_docker_data" = true ]]; then
       touch /etc/docker/daemon.json
       echo "{ 
-        "data-root": "$local_mount"
+        "data-root": "$local_mount/$remote_subdir"
         }" | tee -a /etc/docker/daemon.json
       systemctl stop docker
       systemctl start docker
