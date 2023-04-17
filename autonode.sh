@@ -36,7 +36,7 @@ if [[ "$1" == "-init" ]]; then
     fi
     source "$INPUT_FILE"
     quiet_install=true
-    if [[ -z "$log_file"]]; then
+    if [[ -z "$log_file" ]]; then
       log_file=install.log
     fi
     exec &> >(tee -a "$log_file")
