@@ -28,8 +28,4 @@ To input values manually while Autonode runs, simply make the script executable 
 
 > ./autonode.sh
 
-Project is mirrored from the Cliffhouse Games instance of https://gitea.io/
-
-For support, email kris@cliffhouse.games or join the Cliffhouse Games discord server at https://discord.cliffhouse.games
-
 Enjoy!
